@@ -1,16 +1,34 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "./redux/store";
+import {
+  decrement,
+  increment,
+  incrementByAmount,
+} from "./redux/features/counter/counterSlice";
 
 function App() {
   const { count } = useSelector((state: RootState) => state.counter);
+  const dispatch = useDispatch();
   return (
     <>
       <div className="m-5 flex">
-        <button className="border border-purple-500 px-3 py-2 rounded-md">
+        <button
+          onClick={() => dispatch(increment())}
+          className="border border-purple-500 px-3 py-2 rounded-md"
+        >
           increment
         </button>
+        <button
+          onClick={() => dispatch(incrementByAmount(3))}
+          className="border border-purple-500 px-3 py-2 rounded-md"
+        >
+          Increment by amount
+        </button>
         <div className="mx-5 py-2">{count}</div>
-        <button className="border border-purple-500 px-3 py-2 rounded-md">
+        <button
+          onClick={() => dispatch(decrement())}
+          className="border border-purple-500 px-3 py-2 rounded-md"
+        >
           decrement
         </button>
       </div>
